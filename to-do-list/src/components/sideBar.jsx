@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import Button from "./ui/button";
 
-function SideBar({active,setActive}) {
+function SideBar({active,setActive,setTab,tab}) {
   const navItems = [
     {
       icon: "ri-inbox-2-line",
@@ -38,6 +39,10 @@ function SideBar({active,setActive}) {
       border: false,
     },
   ];
+ useEffect(()=>{
+  tab=='addTask'&&setActive(1)
+ },[tab])
+ 
   return (
     <div className="w-2/12 h-full py-4 px-2  hidden md:flex flex-col border-r-[1px] border-zinc-800">
       <Button
@@ -50,10 +55,14 @@ function SideBar({active,setActive}) {
         {navItems.map((e, i) => (
           <div
             className=""
-            onClick={() => setActive(i)}
+            onClick={() => {
+              i==1&&setTab('addTask')
+              i==0&&setTab('alltask')
+              setActive(i)}}
             key={i}
           >
             <Button
+            
               active={i == active}
               key={i}
               icon={e.icon}
