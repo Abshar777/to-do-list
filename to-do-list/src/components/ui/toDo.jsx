@@ -1,33 +1,37 @@
 import { useEffect, useState } from "react";
 import Badge from "./badge";
-function ToDo({name,des,date,status,edited,active}) {
+import { Reorder, useMotionValue } from "framer-motion";
+import { useRaisedShadow } from "./onRaisedShadow";
+function ToDo({name,des,date,status,edited,active,click,i,item}) {
     const [hover,setHover]=useState(false);
-    const hasMore=des&&des.split(' ').length>20;
-    
+    const hasMore=item.des&&item.des.split(' ').length>20;
+    const y = useMotionValue(0);
+    const boxShadow = useRaisedShadow(y);
     useEffect(()=>{
         active?setHover(true):setHover(false)
         return ()=>{}
     },[active])
+    console.log(item.status)
     return (
-        <div onMouseEnter={()=>setHover(true)} onMouseLeave={()=>!active&&setHover(false)} style={{ transition: 'all ease 0.3s' }} className={`mb-2 py-1 px-4 flex flex-col gap-2  w-[98%] text-white  min-h-[5rem] rounded-md  bg-zinc-800 ${active&&"bg-zinc-900"} hover:bg-zinc-900`}>
+        <Reorder.Item id={i} style={{ boxShadow, y }} value={item} onClick={()=>click(i)} onMouseEnter={()=>setHover(true)} onMouseLeave={()=>!active&&setHover(false)}  className={`mb-2 py-1 px-4 flex flex-col gap-2  w-[98%] text-white  min-h-[5rem] rounded-md  bg-zinc-800 ${active&&"bg-zinc-900"} hover:bg-zinc-900`}>
             <div className="head w-full flex justify-between">
-                <h1 className="capitalize font-semibold text-lg">{name}</h1>
+                <h1 className="capitalize font-semibold text-lg">{item.name}</h1>
                 <div className="flex items-center justify-center gap-2">
-                    {status&&
+                    {item.status==true&&
                     <i className="ri-check-double-line"></i>
                     }
-                    <h1 className="text-zinc-400 text-[.8rem] font-medium">{date}</h1>
+                    <h1 className="text-zinc-400 text-[.8rem] font-medium">{item.date}</h1>
                 </div>
                 
             </div>
             <div className="body h-[50%] overflow-hidden">
-                   <p className="text-zinc-400 text-sm ">{des&&des?.split(' ').slice(0,18).join(' ')} {hasMore&&'...'}</p> 
+                   <p className="text-zinc-400 text-sm ">{item.des&&item.des?.split(' ').slice(0,18).join(' ')} {hasMore&&'...'}</p> 
                 </div>
                 <footer className="w-full mb-2 flex gap-2">
-                    {edited&&<Badge name={"edited"} white={false} border={hover} />}
-                    <Badge name={status?"done":"undone"} white={false} border={hover} />
+                    {item.edited&&<Badge name={"edited"} white={false} border={hover} />}
+                    <Badge name={item.status?"done":"undone"} white={false} border={hover} />
                 </footer>
-        </div>
+        </Reorder.Item>
     )
 }
 

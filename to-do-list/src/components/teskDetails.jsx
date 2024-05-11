@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import TabButton from './ui/tab-button'
 import Sheet from './ui/sheet'
 import Alerts from './ui/alerts'
+import { toast } from 'sonner';
 
-function TeskDetails({ name, des,id, date, status, edited, active, selectedTodo,editFn,dlt }) {
+function TeskDetails({ name, des,id, date, status, edited, active, selectedTodo,editFn,dlt,complete }) {
     const [edit, setEdit] = useState(false);
     const [remove, setRemove] = useState(false)
     return (
@@ -35,10 +36,10 @@ function TeskDetails({ name, des,id, date, status, edited, active, selectedTodo,
                         </div>
                         <Sheet  edit={editFn} name={name} id={id} des={des} setActive={setEdit} active={edit} />
 
-                        <div style={{ transition: "all ease 0.3s" }} className="btn hover:opacity-75 cursor-pointer px-3 flex text-black font-semibold items-center justify-center bg-zinc-200 min-w-[5rem] h-[1.9rem] rounded-lg">
+                        <div onClick={()=>{toast.success('succes fully edited'); complete(id)}} style={{ transition: "all ease 0.3s" }} className="btn hover:opacity-75 cursor-pointer px-3 flex text-black font-semibold items-center justify-center bg-zinc-200 min-w-[5rem] h-[1.9rem] rounded-lg">
                             Completed
                         </div>
-                        <div onClick={() => setRemove(true)} style={{ transition: "all ease 0.3s" }} className="btn hover:opacity-75 cursor-pointer px-3 flex text-white font-semibold items-center justify-center bg-zinc-800 w-[5rem] h-[1.9rem] rounded-lg">
+                        <div onClick={() => {setRemove(true)}} style={{ transition: "all ease 0.3s" }} className="btn hover:opacity-75 cursor-pointer px-3 flex text-white font-semibold items-center justify-center bg-zinc-800 w-[5rem] h-[1.9rem] rounded-lg">
                             Remove
                         </div>
                     </footer></> : <div className="w-full h-[80%] flex flex-col gap-2 text-center justify-center items-center">
