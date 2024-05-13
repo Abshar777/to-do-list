@@ -1,7 +1,7 @@
 import React from 'react'
 function Alerts({active,setActive,dlt,id}) {
   return (
-    <div style={{transition:'all ease 0.3s'}} className={`w-full h-full absolute  ${!active?'z-[-10] opacity-0':'z-[50] opacity-100'} left-0  transition-all ease duration-75 flex items-center justify-center bg-[#000000c7] backdrop-blur-sm`}>
+    <div style={{transition:'all ease 0.3s'}} className={`w-full h-full absolute  ${!active?'z-[-10] opacity-0':'z-[50] opacity-100'} left-0 px-5  transition-all ease duration-75 flex items-center justify-center bg-[#000000c7] backdrop-blur-sm`}>
       
       <div style={{transition:'all ease 0.5s'}} className={`${active?'scale-[1]':'scale-[.8] '} relative transform overflow-hidden rounded-lg bg-zinc-950 border-[.6px] border-zinc-700 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg`}>
         <div className="bg-zinc-950 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">

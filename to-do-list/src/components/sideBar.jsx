@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import Button from "./ui/button";
 
-function SideBar({active,setActive,setTab,tab}) {
+function SideBar({active,setActive,setTab,tab,show,showClick,overlay}) {
+
   const navItems = [
     {
       icon: "ri-inbox-2-line",
@@ -44,13 +45,14 @@ function SideBar({active,setActive,setTab,tab}) {
  },[tab])
  
   return (
-    <div className="w-2/12 h-full py-4 px-2  hidden md:flex flex-col border-r-[1px] border-zinc-800">
+    <div style={{transition:"all ease 0.5s"}} className={ `${!show?"right-[100%]":"right-[30%]"}  w-[70%] md:w-2/12 md:shadow-[0_0_0_0] shadow-[2px_4px_9px_4px_#00000078] h-full py-4 px-2 md:left-0 bg-zinc-950 md:bg-transparent md:z-[1] z-[9999]  flex absolute md:relative flex-col border-r-[1px] border-zinc-800`}>
       <Button
         icon={"ri-triangle-fill"}
         border={true}
         secIcon={"ri-expand-up-down-line"}
         name={"Abshar"}
       />
+      <div className="w-full h-[.5px] mt-4 bg-zinc-700 "></div>
       <div className="md:flex flex-col gap-[.2rem] py-4">
         {navItems.map((e, i) => (
           <div
@@ -58,6 +60,8 @@ function SideBar({active,setActive,setTab,tab}) {
             onClick={() => {
               i==1&&setTab('addTask')
               i==0&&setTab('alltask')
+              i!==active&&showClick()
+              overlay()
               setActive(i)}}
             key={i}
           >

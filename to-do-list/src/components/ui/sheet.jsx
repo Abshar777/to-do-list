@@ -18,8 +18,8 @@ function Sheet({ active, setActive, name, des, id, edit }) {
     }
   }
   return (
-    <div style={{ transition: 'all ease 0.5s' }} className={` sheet absolute text-white w-full h-[50vh] ${active ? "bottom-[-3rem] scale-[1]" : "bottom-[-28rem] "}  bg-zinc-900 border-zinc-500 border-[1px] rounded-t-lg `}>
-      <div className=" sheet head flex border-zinc-500  w-full px-4 py-3 justify-between">
+    <div style={{ transition: 'all ease 0.5s' }} className={` sheet absolute text-white md:w-full w-[95%] md:me-0 me-4  h-[50vh] ${active ? "bottom-[-3rem] scale-[1]" : "bottom-[-28rem] "}  bg-zinc-900 border-zinc-500 border-[1px] rounded-t-lg `}>
+      <div className=" sheet head flex border-zinc-500  w-full px-2 py-3 justify-between">
         <h1 className="font-bold sheet capitalize md:text-2xl text-xl text-white ">
           edit {name}
         </h1>

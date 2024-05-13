@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Badge from "./badge";
 import { Reorder, useMotionValue } from "framer-motion";
 import { useRaisedShadow } from "./onRaisedShadow";
-function ToDo({name,des,date,status,edited,active,click,i,item}) {
+function ToDo({name,des,date,status,edited,active,click,i,item,showClick}) {
     const [hover,setHover]=useState(false);
     const hasMore=item.des&&item.des.split(' ').length>20;
     const y = useMotionValue(0);
@@ -11,9 +11,8 @@ function ToDo({name,des,date,status,edited,active,click,i,item}) {
         active?setHover(true):setHover(false)
         return ()=>{}
     },[active])
-    console.log(item.status)
     return (
-        <Reorder.Item id={i} style={{ boxShadow, y }} value={item} onClick={()=>click(i)} onMouseEnter={()=>setHover(true)} onMouseLeave={()=>!active&&setHover(false)}  className={`mb-2 py-1 px-4 flex flex-col gap-2  w-[98%] text-white  min-h-[5rem] rounded-md  bg-zinc-800 ${active&&"bg-zinc-900"} hover:bg-zinc-900`}>
+        <Reorder.Item id={i} style={{ boxShadow, y }} value={item} onClick={()=>{click(i); showClick()}} onMouseEnter={()=>setHover(true)} onMouseLeave={()=>!active&&setHover(false)}  className={`mb-2 py-1 px-4 flex flex-col gap-2  w-[98%] text-white  min-h-[5rem] rounded-md  bg-zinc-800 ${active&&"bg-zinc-900"} hover:bg-zinc-900`}>
             <div className="head w-full flex justify-between">
                 <h1 className="capitalize font-semibold text-lg">{item.name}</h1>
                 <div className="flex items-center justify-center gap-2">

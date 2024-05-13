@@ -3,7 +3,7 @@ import date from '@/util/formatDate'
 import { toast } from 'sonner';
 import { v4 as uuidv4 } from 'uuid';
 
-function addTask({setTodo,selectedTodo,inputRef,todo}) {
+function addTask({setTodo,selectedTodo,inputRef,todo,overlay,show,showClick}) {
     let [name,setName]=useState('')
     let [des,setDes]=useState('')
     
@@ -35,14 +35,21 @@ function addTask({setTodo,selectedTodo,inputRef,todo}) {
     return (
         <div  className='w-full relative h-full flex flex-col px-2'>
             <div className="flex nav  py-5 px-2  items-center justify-between">
+            <i onClick={()=>{show()}} className="ri-menu-2-line block md:hidden cursor-pointer text-white"></i>
                 <h1 className="font-bold md:text-2xl text-2xl uppercase text-zinc-100 ">
                     Add task
                 </h1>
                 < i className="ri-inbox-2-line text-zinc-400 text-xl"></i>
             </div>
-            <div className="formGroup py-3 px-3 flex flex-col gap-2">
+         
+            <div className="formGroup py-3  flex flex-col gap-2">
+                <div className="flex gap-2 items-center">
+                <i onClick={showClick} class="ri-arrow-drop-left-line md:hidden block text-white cursor-pointer"></i> 
                 <label className="font-semibold  md:text-lg text-lg text-white " htmlFor="name">name</label>
-                <input ref={inputRef} type="text" placeholder='plaese fill the name' onChange={(e)=>setName(e.target.value)} value={name} name='name' className=' bg-zinc-800 h-[2rem] text-white px-3 py-1 outline-0  rounded-lg ' />
+                </div>
+                <div className="flex px-3 w-full">
+                <input ref={inputRef} type="text" placeholder='plaese fill the name' onChange={(e)=>setName(e.target.value)} value={name} name='name' className=' bg-zinc-800 h-[2rem] w-full text-white px-3 py-1 outline-0  rounded-lg ' />
+                </div>
             </div>
             <div className="formGroup py-3 px-3 flex flex-col gap-2">
                 <label className="font-semibold  md:text-lg text-lg text-white " htmlFor="name">description</label>
